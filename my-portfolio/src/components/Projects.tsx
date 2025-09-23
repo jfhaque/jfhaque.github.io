@@ -1,68 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
-interface Repo {
-  id: number;
-  name: string;
-  html_url: string;
-  description: string;
-}
-
 const Projects: React.FC = () => {
-  const [repos, setRepos] = useState<Repo[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("https://api.github.com/users/jfhaque/repos")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`GitHub API Error: ${res.status} ${res.statusText}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setRepos(data);
-        } else {
-          throw new Error("Invalid response format");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching GitHub repos:", err);
-        setError("Failed to fetch projects. GitHub API rate limit exceeded or blocked.");
-      });
-  }, []);
-
   return (
-    <section id="projects" className="bg-blue-50 text-darkBlue min-h-[90vh] py-32 px-6 relative">
+    <section
+      id="projects"
+      className="bg-blue-50 text-darkBlue min-h-[90vh] py-32 px-6 relative"
+    >
       <h2 className="text-4xl font-bold text-center text-blue-900">Projects</h2>
 
-      {error ? (
-        <p className="text-center text-red-600 mt-4">{error}</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 px-6 max-w-6xl mx-auto">
-          {repos.map((repo, index) => (
-            <motion.div
-              key={repo.id}
-              className="bg-lightBlue p-6 rounded-lg shadow-lg transition-transform hover:scale-105 duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.8 }}
-            >
-              <h3 className="text-xl font-semibold text-black">{repo.name}</h3>
-              <p className="text-gray-700">{repo.description || "No description available."}</p>
-              <a
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline mt-4 inline-block"
-              >
-                View on GitHub
-              </a>
-            </motion.div>
-          ))}
-        </div>
-      )}
+      <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Project 1 */}
+        <motion.div
+          className="bg-white rounded-xl shadow-lg overflow-hidden"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+            <iframe
+              src="https://www.youtube.com/embed/Uc524mfhamI?rel=0&modestbranding=1"
+              title="Wizards of Churchill Place"
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-xl font-semibold text-gray-900">
+              Wizards of Churchill Place
+            </h3>
+            <p className="mt-3 text-gray-700 leading-relaxed">
+              A fantasy action game powered by a custom C++ game engine I built
+              entirely from scratch. The engine handles rendering, input,
+              collision detection, and game loop management, while the game
+              itself features spellcasting mechanics and character-driven
+              combat. This project showcases my ability to design core engine
+              systems and build a complete game experience on top of them.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Project 2 */}
+        <motion.div
+          className="bg-white rounded-xl shadow-lg overflow-hidden"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.08 }}
+        >
+          <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+            <iframe
+              src="https://www.youtube.com/embed/kedLR-YX2R8?rel=0&modestbranding=1"
+              title="StarCraft Bot Project"
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-xl font-semibold text-gray-900">StarCraft AI Bot</h3>
+            <p className="mt-3 text-gray-700 leading-relaxed">
+              An AI bot built for StarCraft that automates gameplay by managing
+              resources, controlling units, and making strategic decisions in
+              real-time. I implemented algorithms for build order optimization,
+              scouting, and adaptive combat tactics, giving me practical
+              experience in AI programming, decision trees, and game automation.
+            </p>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
