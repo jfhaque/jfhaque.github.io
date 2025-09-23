@@ -11,6 +11,7 @@ const LINKS = [
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("profile");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -29,15 +30,16 @@ const Header: React.FC = () => {
     const y = el.getBoundingClientRect().top + window.scrollY - 80;
     window.scrollTo({ top: y, behavior: "smooth" });
     setActive(targetId);
+    setOpen(false);
   };
 
   return (
     <header className="fixed top-6 left-0 w-full flex justify-center z-50">
-      {/* Floating nav container */}
+      {/* Nav container */}
       <nav
         className={[
           "flex items-center gap-6 px-6 py-3 rounded-full shadow-lg backdrop-blur-md transition-all",
-          scrolled ? "bg-white/80 border border-gray-200" : "bg-white/60",
+          scrolled ? "bg-white/90 border border-gray-200" : "bg-white/70",
         ].join(" ")}
       >
         {/* Logo */}
@@ -49,36 +51,96 @@ const Header: React.FC = () => {
           <img src={myLogo} alt="Logo" className="h-7 w-7 object-contain" />
         </a>
 
-        {/* Links */}
-        {LINKS.map((link) => (
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-6">
+          {LINKS.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={(e) => handleSmoothScroll(e, link.id)}
+              className={[
+                "relative text-[15px] font-medium transition-colors",
+                active === link.id
+                  ? "text-blue-600"
+                  : "text-gray-700 hover:text-blue-600",
+              ].join(" ")}
+            >
+              {link.label}
+              {active === link.id && (
+                <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-600 rounded" />
+              )}
+            </a>
+          ))}
           <a
-            key={link.id}
-            href={`#${link.id}`}
-            onClick={(e) => handleSmoothScroll(e, link.id)}
-            className={[
-              "relative text-[15px] font-medium transition-colors",
-              active === link.id
-                ? "text-blue-600"
-                : "text-gray-700 hover:text-blue-600",
-            ].join(" ")}
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 px-4 py-2 text-sm font-medium rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
           >
-            {link.label}
-            {active === link.id && (
-              <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-600 rounded" />
-            )}
+            Resume
           </a>
-        ))}
+        </div>
 
-        {/* Resume Button */}
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-2 px-4 py-2 text-sm font-medium rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
+        {/* Mobile burger */}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+          aria-label="Toggle menu"
         >
-          Resume
-        </a>
+          <svg
+            className="h-6 w-6 text-gray-800"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            {open ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+        </button>
       </nav>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <div className="absolute top-20 mx-4 w-[90%] bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-gray-200 p-6 md:hidden">
+          <div className="flex flex-col gap-4">
+            {LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleSmoothScroll(e, link.id)}
+                className={[
+                  "text-lg font-medium transition-colors",
+                  active === link.id
+                    ? "text-blue-600"
+                    : "text-gray-800 hover:text-blue-600",
+                ].join(" ")}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 px-4 py-2 text-center font-medium rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
+            >
+              Resume
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
