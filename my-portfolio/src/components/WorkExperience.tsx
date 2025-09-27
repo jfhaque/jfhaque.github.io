@@ -3,64 +3,87 @@ import { motion } from "framer-motion";
 
 const WorkExperience: React.FC = () => {
   return (
-    <section id="work" className="w-full bg-blue-70 text-white min-h-[90vh] py-32 relative">
-
+    <section id="work" className="w-full bg-blue-70 text-white min-h-[90vh] py-28 relative">
+      {/* Title */}
       <motion.h2
         className="text-4xl font-bold text-center text-blue-900 mb-10"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
       >
         Work Experience
       </motion.h2>
 
-      {/* Work Experience Layout */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-        {/* Left Side - Image */}
-        <motion.div
-          className="w-full flex justify-center"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <img src={require("./images/work.jpg")} alt="Work Experience" className="w-500 h-auto rounded-lg shadow-lg" />
-        </motion.div>
+      {/* Full-width image (within content container) */}
+      <motion.div
+        className="mx-auto max-w-4xl px-4"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <div className="w-full overflow-hidden rounded-2xl shadow-xl bg-white flex justify-center">
+          <img
+            src={require("./images/work.jpg")}
+            alt="Games I worked on"
+            className="w-full max-h-[500px] object-contain"
+          />
+        </div>
+      </motion.div>
 
-        {/* Right Side - Experience Text */}
+
+      {/* Roles below the image */}
+      <div className="mx-auto max-w-6xl px-4 mt-10">
         <motion.div
-          className="space-y-6"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
         >
           {/* Job 1 */}
-          <div className="p-6 bg-lightBlue text-black shadow-md rounded-lg">
-            <h3 className="text-2xl font-semibold">Game Developer - Carnegie Learning</h3>
-            <p className="text-gray-700">May 2022 - Jan 2025 | St. John's, Canada</p>
-            <ul className="list-disc mt-2 pl-5 text-sm">
-              <li>Developed and optimized robust gameplay mechanics and AI-driven systems in Unity and C++, enhancing interactive player experiences for more than 5.5 million users.
+          <motion.article
+            className="p-6 bg-lightBlue text-black shadow-md rounded-2xl"
+            variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}
+          >
+            <h3 className="text-2xl font-semibold leading-snug">
+              Game Developer – Carnegie Learning
+            </h3>
+            <p className="text-gray-700 mt-1">May 2022 – Jan 2025 · St. John’s, Canada</p>
+            <ul className="list-disc mt-3 pl-5 text-sm space-y-2">
+              <li>
+                Developed and optimized gameplay mechanics and AI systems in Unity and C++, improving
+                experiences for 5.5M+ users.
               </li>
-              <li>Implemented gameplay features and rapid prototypes, iterating based on team and user feedback to enhance player engagement.
+              <li>
+                Built features and rapid prototypes; iterated from team/user feedback to boost engagement.
               </li>
-              <li>Improved game performance by 25% through multi-threaded solutions, memory management, and asset optimization, ensuring a seamless experience across platforms.
+              <li>
+                Improved performance by ~25% via multi-threading, memory tuning, and asset optimization.
               </li>
-              <li>Integrated and refined animation trees, ensuring smooth character movement and gameplay mechanics.</li>
-              <li>Mentored junior developers, fostering skills in AI, gameplay, and engine optimization.</li>
+              <li>Refined animation trees for smooth character control and gameplay feel.</li>
+              <li>Mentored junior devs across AI, gameplay, and engine optimization.</li>
             </ul>
-          </div>
+          </motion.article>
 
           {/* Job 2 */}
-          <div className="p-6 bg-lightBlue text-black shadow-md rounded-lg">
-            <h3 className="text-2xl font-semibold">Game Development Intern - Carnegie Learning</h3>
-            <p className="text-gray-700">Jan 2021 - Apr 2022 | St. John's, Canada</p>
-            <ul className="list-disc mt-2 pl-5 text-sm">
-              <li>Assisted in the development of core gameplay mechanics, including AI behavior and interactive elements.</li>
-              <li>Debugged AI and animation interactions, improving game stability and responsiveness.</li>
-              <li>Prototyped two game mechanics that were successfully integrated into the final game.</li>
-              <li>Conducted performance analysis and implemented optimizations to enhance rendering and frame rate stability.</li>
-              <li>Collaborated with cross-functional teams to ensure seamless gameplay and immersive environments.</li>
+          <motion.article
+            className="p-6 bg-lightBlue text-black shadow-md rounded-2xl"
+            variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } }}
+          >
+            <h3 className="text-2xl font-semibold leading-snug">
+              Game Development Intern – Carnegie Learning
+            </h3>
+            <p className="text-gray-700 mt-1">Jan 2021 – Apr 2022 · St. John’s, Canada</p>
+            <ul className="list-disc mt-3 pl-5 text-sm space-y-2">
+              <li>Contributed to core gameplay systems including AI behaviors and interactive elements.</li>
+              <li>Debugged AI/animation interactions to improve stability and responsiveness.</li>
+              <li>Prototyped two mechanics that shipped in the final game.</li>
+              <li>Ran performance analysis and implemented rendering/frame-rate optimizations.</li>
+              <li>Collaborated cross-functionally to deliver smooth, immersive gameplay.</li>
             </ul>
-          </div>
+          </motion.article>
         </motion.div>
       </div>
     </section>

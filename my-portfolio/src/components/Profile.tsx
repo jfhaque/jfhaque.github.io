@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
   return (
     <section
       id="profile"
-      className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 py-16"
+      className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 py-16 gap-y-10 md:gap-x-20"
       style={{
         backgroundImage: `url(${homeBackground})`,
         backgroundSize: 'cover',
@@ -46,12 +46,14 @@ const Profile: React.FC = () => {
           />
         </h2>
 
-        <p className="text-m font-bold mb-6">
-        I am a passionate Game Developer with over 3 years of experience specializing in AI-driven gameplay and game performance optimization.
-        With expertise in C#, C++, Unreal Engine, and Unity, I focus on creating immersive gaming experiences.
-        I have a proven track record in rapid prototyping, debugging, and refining features to enhance gameplay.
-        I thrive in collaborative environments and am dedicated to continuously improving game systems and performance to deliver top-notch player experiences.
+        <p className="text-lg md:text-xl text-black-800 font-medium leading-relaxed max-w-2xl mb-6">
+          Passionate <span className="font-bold text-blue-900">Game Developer</span> with 3+ years of experience 
+          specializing in <span className="font-bold text-blue-900">AI-driven gameplay</span> and 
+          <span className="font-bold text-blue-900"> performance optimization</span>. Skilled in C#, C++, Unity, and Unreal Engine, 
+          with a proven track record in rapid prototyping, debugging, and refining gameplay. Dedicated to building 
+          immersive player experiences and continuously improving game systems.
         </p>
+
 
         {/* Social Links */}
         <div className="flex space-x-4 mb-6">
