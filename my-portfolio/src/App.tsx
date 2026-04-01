@@ -9,7 +9,7 @@ import ParticlesBackground from "./components/ParticlesBackground";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-lightGray text-whiteText min-h-screen">
+    <div className="bg-bg text-textPrimary min-h-screen">
       <Header />
       <main className="container mx-auto px-6">
       <ParticlesBackground />
