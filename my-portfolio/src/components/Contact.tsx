@@ -30,7 +30,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="bg-bgLight text-textPrimary min-h-[90vh] py-28 px-6 relative">
+    <section id="contact" className="bg-bgAlt text-textPrimary py-20 px-6 relative">
       <motion.h2
         className="text-4xl font-bold text-center text-textDark mb-4"
         initial={{ opacity: 0 }}
@@ -41,14 +41,14 @@ const Contact: React.FC = () => {
         Get In Touch
       </motion.h2>
       <motion.div
-        className="w-12 h-1 bg-accent mx-auto mb-6 rounded"
+        className="w-12 h-1 bg-accent mx-auto mb-4 rounded"
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       />
       <motion.p
-        className="text-center text-textSecondary max-w-lg mx-auto mb-12"
+        className="text-center text-textSecondary max-w-lg mx-auto mb-8"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

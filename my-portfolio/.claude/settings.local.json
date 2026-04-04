@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "WebFetch(domain:github.com)",
+      "Read(//c/Users/junai/OneDrive/Documents/GitHub/jfhaque.github.io/**)"
     ]
   }
 }
